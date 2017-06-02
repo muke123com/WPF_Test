@@ -1,4 +1,5 @@
 /packages/
+/WpfApp1/bin/*
 /.vs/
 /.settings/*
 /.project
