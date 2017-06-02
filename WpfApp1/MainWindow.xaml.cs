@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -15,18 +12,25 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string fileText;
+        private String url = "http://47.92.68.251:3000/douban/book/series?seriesId=3";
+        private String filePath = "F:/json.json";
+        private String fileText; //数据json字符串
+        private JArray BookInfoList; //图书列表数组
+        LocalData localData = new LocalData();
+        ServerData serverData = new ServerData();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            ///读取文件
-            FileInfo file = new FileInfo("F:/json.json");
-            StreamReader sf = file.OpenText();
-            fileText = sf.ReadLine();
+            //获取服务器内容
+            fileText = serverData.GetServerData(url);
+            //写入本地文件
+            localData.WriteLocalData(filePath, fileText);
+            //获取本地文件内容
+            fileText = localData.GetLocalData(filePath);
 
-            ///listbox数据显示
+            //listbox数据显示
             Item_List.ItemsSource = Items;
         }
 
@@ -34,7 +38,11 @@ namespace WpfApp1
         {
             
         }
-
+        /// <summary>
+        /// 关闭窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string message = "Quit the application?";
@@ -48,7 +56,9 @@ namespace WpfApp1
                 e.Cancel = true; // 取消退出
             }
         }
-
+        /// <summary>
+        /// 填充数据List
+        /// </summary>
         private List<BooksInfo> Items
         {
             get
@@ -56,10 +66,16 @@ namespace WpfApp1
 
                 JObject bookSeries = GetBookData(fileText); ///获取json数据
                 int count = (int)bookSeries["count"];
+                int total = (int)bookSeries["total"];
+                int length = count < total ? count : total;
                 List<BooksInfo> result = new List<BooksInfo>();
-                for(int i = 0; i < count; i++)
+                for(int i = 0; i < length; i++)
                 {
                     BooksInfo book = new BooksInfo();
+
+                    BookInfoList = (JArray)bookSeries["books"];
+
+                    int bookId = (int)bookSeries["books"][i]["id"];
                     String bookTitle = bookSeries["books"][i]["title"].ToString(); ///图书标题
                     String bookPublisher = bookSeries["books"][i]["publisher"].ToString(); ///
                     var bookAuthorArray = bookSeries["books"][i]["author"]; ///作者数组
@@ -68,6 +84,7 @@ namespace WpfApp1
                     {
                         bookAuthor += author + " ";
                     }
+                    book.Id = bookId;
                     book.Title = bookTitle;
                     book.Publisher = bookPublisher;
                     book.Author = bookAuthor;
@@ -77,14 +94,31 @@ namespace WpfApp1
                 return result;
             }
         }
-
+        /// <summary>
+        /// 点击列表项
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Selected_Item(object sender, SelectionChangedEventArgs e)
         {
-            
-            Text_Show.Text = e.ToString();
-            
-        }
+            BooksInfo booksInfo = new BooksInfo();
+            booksInfo = (BooksInfo)Item_List.SelectedItem;
+            int bookId = booksInfo.Id;
+            foreach(JObject bookDetail in BookInfoList)
+            {
+                if ((int)bookDetail["id"] == bookId)
+                {
+                    Text_Show.Text = bookDetail.ToString();
+                    break;
+                };
+            }
 
+        }
+        /// <summary>
+        /// json字符串转为json
+        /// </summary>
+        /// <param name="fileText"></param>
+        /// <returns></returns>
         public JObject GetBookData(String fileText)
         {
             var BookInfo = JsonConvert.DeserializeObject<JObject>(fileText);
@@ -99,16 +133,12 @@ namespace WpfApp1
         }
     }
 
-    public struct Series
-    {
-        public int count;
-        public int start;
-        public int total;
-        public List<BooksInfo> books;
-    }
-
+    /// <summary>
+    /// 图书信息实体类
+    /// </summary>
     public class BooksInfo
     {
+        public int Id { set; get; }
         public String Title { set; get; }
         public String Author { set; get; }
         public String Publisher { set; get; }

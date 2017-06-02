@@ -5,21 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="WPF Learn" Height="320" Width="320" 
+        Title="WPF Learn" Width="800" Height="600" 
 		Loaded="Window_Loaded"
 		Closing="Window_Closing"
 		>
 	<Window.Resources>
 		<DataTemplate x:Key="_bookDetailViewTemplate">
 			<StackPanel>
-				<TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="15"></TextBlock>
-				<TextBlock Text="{Binding Publisher}"></TextBlock>
+				<TextBlock Text="{Binding Title}" Tag="{Binding Id}"
+					FontSize="12" Foreground="#fff" 
+				></TextBlock>
+				
+				<!--
+				<TextBlock Text="{Binding Publisher}" Padding="5"></TextBlock>
 				<TextBlock Text="{Binding Author}" FontSize="12" Foreground="#aaa" Margin="0 0 0 10"></TextBlock>
+				-->
 			</StackPanel>
 		</DataTemplate>
 	</Window.Resources>
 	<Grid>
-		<TextBlock x:Name="Text_Show" Height="50" TextWrapping="Wrap" VerticalAlignment="Top"></TextBlock>
-		<ListBox x:Name="Item_List" Margin="0 60 0 0" SelectionChanged="Selected_Item" ItemTemplate="{StaticResource _bookDetailViewTemplate}"></ListBox>
+		<Grid.RowDefinitions>
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition Width="200" />
+		</Grid.ColumnDefinitions>
+		<Grid Grid.Column="0" Grid.Row="0">
+			<ScrollViewer VerticalScrollBarVisibility="Auto">
+				<TextBlock x:Name="Text_Show" TextWrapping="Wrap" 
+					Margin="10" Background="#eee"></TextBlock>
+			</ScrollViewer>
+		</Grid>
+		<Grid Grid.Column="1" Grid.Row="0" >
+			<ListBox x:Name="Item_List" SelectionChanged="Selected_Item" ItemTemplate="{StaticResource _bookDetailViewTemplate}"
+				Background="#333" Margin="0"></ListBox>
+		</Grid>
 	</Grid>
 </Window>
