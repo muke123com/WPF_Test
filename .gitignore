@@ -1,0 +1,7 @@
+/packages/
+/.vs/
+/.settings/*
+/.project
+/.buildpath
+
+

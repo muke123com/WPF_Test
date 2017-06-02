@@ -1,0 +1,27 @@
+﻿<Window x:Class="WpfApp1.CarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="CarWindow" Height="300" Width="300">
+	<Window.Resources>
+		<!--Convert-->
+		<!--DataTemplate for Item View -->
+		<DataTemplate x:Key="_carListItemViewTemplate">
+			<Grid Margin="2">
+				<StackPanel Orientation="Horizontal">
+					<StackPanel Margin="5,10">
+						<TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold"></TextBlock>
+						<TextBlock Text="{Binding Year}" FontSize="14"></TextBlock>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
+	<!---Window Content-->
+	<StackPanel Orientation="Horizontal" Margin="5">
+		<ListBox x:Name="_listBoxCars" Width="180" Margin="5,0" ItemTemplate="{StaticResource _carListItemViewTemplate}"></ListBox>
+	</StackPanel>
+</Window>
