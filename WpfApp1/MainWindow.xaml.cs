@@ -108,9 +108,14 @@ namespace WpfApp1
             {
                 if ((int)bookDetail["id"] == bookId)
                 {
+                    String authors = "";
+                    foreach (String author in bookDetail["author"])
+                    {
+                        authors += author + " | ";
+                    }
                     booksInfo.Image = bookDetail["image"].ToString();
                     booksInfo.Title = bookDetail["title"].ToString();
-                    booksInfo.Author = bookDetail["author"].ToString();
+                    booksInfo.Author = authors;
                     BookDetail.DataContext = booksInfo;
                     break;
                 };
