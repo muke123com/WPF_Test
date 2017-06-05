@@ -12,7 +12,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private String url = "http://47.92.68.251:3000/douban/book/series?seriesId=3";
+        private String url = "http://47.92.68.251:3000/douban/book/series?seriesId=1";
         private String filePath = "F:/json.json";
         private String fileText; //数据json字符串
         private JArray BookInfoList; //图书列表数组
@@ -64,7 +64,7 @@ namespace WpfApp1
             get
             {
 
-                JObject bookSeries = GetBookData(fileText); ///获取json数据
+                JObject bookSeries = ManageJson.GetJson(fileText); ///获取json数据
                 int count = (int)bookSeries["count"];
                 int total = (int)bookSeries["total"];
                 int length = count < total ? count : total;
@@ -108,17 +108,16 @@ namespace WpfApp1
             {
                 if ((int)bookDetail["id"] == bookId)
                 {
-                    Text_Show.Text = bookDetail.ToString();
+                    booksInfo.Image = bookDetail["image"].ToString();
+                    booksInfo.Title = bookDetail["title"].ToString();
+                    booksInfo.Author = bookDetail["author"].ToString();
+                    BookDetail.DataContext = booksInfo;
                     break;
                 };
             }
 
         }
-        /// <summary>
-        /// json字符串转为json
-        /// </summary>
-        /// <param name="fileText"></param>
-        /// <returns></returns>
+        
         public JObject GetBookData(String fileText)
         {
             var BookInfo = JsonConvert.DeserializeObject<JObject>(fileText);
@@ -142,6 +141,7 @@ namespace WpfApp1
         public String Title { set; get; }
         public String Author { set; get; }
         public String Publisher { set; get; }
+        public String Image { set; get; }
     }
 }
 

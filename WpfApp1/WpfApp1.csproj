@@ -64,7 +64,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Apple_Store_Louvre_Pyramid_icon_128px_1060314_easyicon.net.ico</ApplicationIcon>
+    <ApplicationIcon>html5_geek_matt_html_128px_531948_easyicon.net.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="framework\ServerData.cs" />
+    <Compile Include="framework\ManageJson.cs" />
     <Page Include="CarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Apple_Store_Louvre_Pyramid_icon_128px_1060314_easyicon.net.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="html5_geek_matt_html_128px_531948_easyicon.net.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

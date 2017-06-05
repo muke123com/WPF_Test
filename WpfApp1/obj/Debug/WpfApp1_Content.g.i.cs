@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("apple_store_louvre_pyramid_icon_128px_1060314_easyicon.net.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("html5_geek_matt_html_128px_531948_easyicon.net.ico")]
 
 

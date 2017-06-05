@@ -10,7 +10,7 @@
 		Closing="Window_Closing"
 		>
 	<Window.Resources>
-		<DataTemplate x:Key="_bookDetailViewTemplate">
+		<DataTemplate x:Key="_bookListViewTemplate">
 			<StackPanel>
 				<TextBlock Text="{Binding Title}" Tag="{Binding Id}"
 					FontSize="12" Foreground="#fff" 
@@ -32,13 +32,15 @@
 			<ColumnDefinition Width="200" />
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Column="0" Grid.Row="0">
-			<ScrollViewer VerticalScrollBarVisibility="Auto">
-				<TextBlock x:Name="Text_Show" TextWrapping="Wrap" 
-					Margin="10" Background="#eee"></TextBlock>
-			</ScrollViewer>
+			<!-- 数据对象绑定 -->
+			<StackPanel x:Name="BookDetail">
+				<Image x:Name="BookImage" Width="100" Height="150" HorizontalAlignment="Left" Source="{Binding Path=Image}"></Image>
+				<TextBlock x:Name="BookTitle" Text="{Binding Title}"></TextBlock>
+				<TextBlock x:Name="BookAuthor" Text="{Binding Author}"></TextBlock>
+			</StackPanel>
 		</Grid>
 		<Grid Grid.Column="1" Grid.Row="0" >
-			<ListBox x:Name="Item_List" SelectionChanged="Selected_Item" ItemTemplate="{StaticResource _bookDetailViewTemplate}"
+			<ListBox x:Name="Item_List" SelectionChanged="Selected_Item" ItemTemplate="{StaticResource _bookListViewTemplate}"
 				Background="#333" Margin="0"></ListBox>
 		</Grid>
 	</Grid>
