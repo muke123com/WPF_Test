@@ -35,7 +35,7 @@
 			<!-- 数据对象绑定 -->
 			<StackPanel x:Name="BookDetail" Margin="20">
 				<Image x:Name="BookImage" 
-					Width="160" Margin="0 50 0 10" Source="{Binding Path=Image}"></Image>
+					Width="200" Margin="0 50 0 10" Source="{Binding Path=Image}"></Image>
 				<TextBlock x:Name="BookTitle" Text="{Binding Title}"
 					Margin="10" TextAlignment="Center"></TextBlock>
 				<TextBlock x:Name="BookAuthor" Text="{Binding Author}" 

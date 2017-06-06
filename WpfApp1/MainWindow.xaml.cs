@@ -113,7 +113,7 @@ namespace WpfApp1
                     {
                         authors += author + " | ";
                     }
-                    booksInfo.Image = bookDetail["image"].ToString();
+                    booksInfo.Image = bookDetail["images"]["large"].ToString();
                     booksInfo.Title = bookDetail["title"].ToString();
                     booksInfo.Author = authors;
                     BookDetail.DataContext = booksInfo;
