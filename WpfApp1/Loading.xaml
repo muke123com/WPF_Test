@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-		Loaded="Loading_Data"
-        Title="Loading" Height="50" Width="100">
+        Title="Loading" Height="150" Width="200">
     <Grid>
 		<TextBlock x:Name="Loading_Text"></TextBlock>
+		<Button Click="Loading_Data">载入数据</Button>
     </Grid>
 </Window>

@@ -17,18 +17,17 @@ namespace WpfApp1
         private String fileText; //数据json字符串
         private JArray BookInfoList; //图书列表数组
         LocalData localData = new LocalData();
-        ServerData serverData = new ServerData();
 
         public MainWindow()
         {
             InitializeComponent();
 
             //获取服务器内容
-            fileText = serverData.GetServerData(url);
+            fileText = ServerData.GetServerData(url);
             //写入本地文件
-            localData.WriteLocalData(filePath, fileText);
+            LocalData.WriteLocalData(filePath, fileText);
             //获取本地文件内容
-            fileText = localData.GetLocalData(filePath);
+            fileText = LocalData.GetLocalData(filePath);
 
             //listbox数据显示
             Item_List.ItemsSource = Items;

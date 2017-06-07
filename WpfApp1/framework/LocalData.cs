@@ -11,7 +11,7 @@ namespace WpfApp1
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public String GetLocalData(String filePath)
+        public static String GetLocalData(String filePath)
         {
             String fileText;
             ///读取文件
@@ -22,7 +22,7 @@ namespace WpfApp1
             return fileText;
         }
 
-        public void WriteLocalData(String filePath, String fileText)
+        public static void WriteLocalData(String filePath, String fileText)
         {
             File.WriteAllText(filePath, fileText, Encoding.UTF8);
         }

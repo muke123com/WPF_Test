@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace WpfApp1
 {
@@ -7,6 +8,9 @@ namespace WpfApp1
     /// </summary>
     public partial class Loading : Window
     {
+        private String baseUrl = "http://47.92.68.251:3000/douban/book/series?seriesId=";
+        private String url;
+        private String filePath = "F:/json.json";
         public Loading()
         {
             InitializeComponent();
@@ -15,8 +19,16 @@ namespace WpfApp1
 
         private void Loading_Data(object sender, RoutedEventArgs e)
         {
+            url = GetUrl(5);
+            String fileText = "";
+            //获取服务器内容
+            fileText += ServerData.GetServerData(GetUrl(1));
+            fileText += ServerData.GetServerData(GetUrl(2));
+            fileText += ServerData.GetServerData(GetUrl(3));
+            //写入本地文件
+            LocalData.WriteLocalData(filePath, fileText);
             Loading_Text.Text = "载入数据中。。。";
-            Load_Ready();
+            //Load_Ready();
         }
 
         private void Load_Ready()
@@ -27,5 +39,10 @@ namespace WpfApp1
             //main.Show();
         }
 
+        public String GetUrl(int seriesId)
+        {
+            String newUrl = baseUrl + seriesId;
+            return newUrl;
+        }
     }
 }

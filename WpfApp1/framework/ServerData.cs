@@ -10,7 +10,7 @@ namespace WpfApp1
 {
     class ServerData
     {
-        public String GetServerData(String url)
+        public static String GetServerData(String url)
         {
             String fileText = "";
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
