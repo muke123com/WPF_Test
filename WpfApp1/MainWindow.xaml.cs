@@ -129,11 +129,6 @@ namespace WpfApp1
             return BookInfo;
         }
 
-        private void Go_CarWindow(object sender, RoutedEventArgs e)
-        {
-            CarWindow car = new CarWindow();
-            car.Show();
-        }
     }
 
     /// <summary>
