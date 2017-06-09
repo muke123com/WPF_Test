@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="GameWindow1">
-	<Canvas x:Name="Carrier" Width="800" Height="600" Background="Silver"
-		MouseLeftButtonDown="Carrier_MouseLeftButtonDown"	
-		></Canvas>
+	<StackPanel>
+		<Canvas x:Name="Carrier" Width="800" Height="600" Background="Silver"
+			MouseLeftButtonDown="Carrier_MouseLeftButtonDown"	
+			></Canvas>
+	</StackPanel>
 </Window>
